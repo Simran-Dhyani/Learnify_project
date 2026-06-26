@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.stroke-text {
+    color: transparent;
+    -webkit-text-stroke: 3px white;
+}
 
 @layer base {
   :root {
@@ -10,6 +14,10 @@
   }
 
   body {
-    @apply bg-white text-black;
+    @apply bg-obsidian text-white antialiased;
+  }
+
+  .perspective-2000 {
+    perspective: 2000px;
   }
 }

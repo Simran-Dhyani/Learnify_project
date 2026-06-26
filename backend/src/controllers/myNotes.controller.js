@@ -10,17 +10,28 @@ const myNotes = asyncHandler(async (req, res) => {
       },
     },
     {
+      $sort: {
+        updatedAt: -1,
+      },
+    },
+    {
       $group: {
         _id: "$videoId",
+        videoTitle: { $first: "$videoTitle" },
         notesCount: { $sum: 1 },
-       
+        updatedAt: { $first: "$updatedAt" },
+      },
+    },
+    {
+      $sort: {
+        updatedAt: -1,
       },
     },
   ]);
 
-  return res.status(200).json(
-    new ApiResponse(200, notes, "My Notes fetched successfully")
-  );
+  return res
+    .status(200)
+    .json(new ApiResponse(200, notes, "My Notes fetched successfully"));
 });
 
 export default myNotes;

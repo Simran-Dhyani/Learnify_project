@@ -1,89 +1,79 @@
-import { asyncHandler } from "../utils/asyncHandler.js"
-import {ApiError} from "../utils/ApiError.js"
-import { ApiResponse } from "../utils/ApiResponse.js"
-import { Note } from "../models/note.model.js"
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { Note } from "../models/note.model.js";
 
-// save notes 
-const createNote=asyncHandler(async(req,res)=>{
-//read data from req.body
-//validate data
-//get user id from req.user
-//save notes in mongoDB
-//return res
- console.log("BODY:", req.body);
-const {videoId,content,videoTitle}=req.body
-if(!videoId || !content || !videoTitle){
-    throw new ApiError(400,"videoId , content or title is missing")
-}
-const currentUser=req.user?._id
+const createNote = asyncHandler(async (req, res) => {
+  const { videoId, content } = req.body;
+  const videoTitle = req.body.videoTitle?.trim() || `YouTube Video ${videoId}`;
 
-const notes=await Note.create({
-    user:currentUser,
+  if (!videoId || !content?.trim()) {
+    throw new ApiError(400, "videoId and content are required");
+  }
+
+  const currentUser = req.user?._id;
+
+  const notes = await Note.create({
+    user: currentUser,
     videoId,
-    content,
-    videoTitle
-})
+    content: content.trim(),
+    videoTitle,
+  });
 
-if(!notes){
-    throw new ApiError(409,"Notes not found !!")
-}
-return res.status(201).json(
-    new ApiResponse(200,notes,"Notes saved successfully !!")
-)
-})
+  if (!notes) {
+    throw new ApiError(409, "Notes not found !!");
+  }
 
+  return res
+    .status(201)
+    .json(new ApiResponse(200, notes, "Notes saved successfully !!"));
+});
 
+const getNotes = asyncHandler(async (req, res) => {
+  const { videoId } = req.params;
+  const notes = await Note.find({
+    user: req.user?._id,
+    videoId,
+  }).sort({ createdAt: -1 });
 
-// get notes or display notes
-const getNotes=asyncHandler(async(req,res)=>{
-    const {videoId}=req.params;
-    const notes=await Note.find({
-        user:req.user?._id,
-        videoId,
-    
-    })
-    return res.status(200).json(
-     new ApiResponse(200, notes, "Notes fetched successfully")
-    );
-})
-
-
-// delete  notes
+  return res
+    .status(200)
+    .json(new ApiResponse(200, notes, "Notes fetched successfully"));
+});
 
 const deleteNote = asyncHandler(async (req, res) => {
-    const { noteId } = req.params;
+  const { noteId } = req.params;
 
-    await Note.findOneAndDelete({
-        _id: noteId,
-        user: req.user._id,
-    });
+  await Note.findOneAndDelete({
+    _id: noteId,
+    user: req.user._id,
+  });
 
-    return res.status(200).json(
-        new ApiResponse(200, {}, "Note deleted")
-    );
+  return res.status(200).json(new ApiResponse(200, {}, "Note deleted"));
 });
 
-//edit notes
 const updateNote = asyncHandler(async (req, res) => {
-    const { noteId } = req.params;
-    const { content } = req.body;
+  const { noteId } = req.params;
+  const { content } = req.body;
 
-    const note = await Note.findOneAndUpdate(
-        {
-            _id: noteId,
-            user: req.user._id,
-        },
-        {
-            content,
-        },
-        {
-            new: true,
-        }
-    );
+  if (!content?.trim()) {
+    throw new ApiError(400, "content is required");
+  }
 
-    return res.status(200).json(
-        new ApiResponse(200, note, "Note updated")
-    );
+  const note = await Note.findOneAndUpdate(
+    {
+      _id: noteId,
+      user: req.user._id,
+    },
+    {
+      content: content.trim(),
+    },
+    {
+      new: true,
+    }
+  );
+
+  return res.status(200).json(new ApiResponse(200, note, "Note updated"));
 });
 
-export { createNote, getNotes,deleteNote,updateNote }
+export { createNote, getNotes, deleteNote, updateNote };

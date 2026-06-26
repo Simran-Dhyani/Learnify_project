@@ -5,78 +5,74 @@ import Container from "../container/Container";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import LogOutBtn from "./LogOut";
-
+import { Zap } from "lucide-react";
 
 function Header() {
   const authStatus = useSelector((state) => state.auth.status);
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-black border-b border-white/20">
+    <header className="sticky top-0 left-0 right-0 z-[100] backdrop-blur-2xl bg-black border-b border-white/5">
       <Container>
-        <div className="flex items-center justify-between py-4">
+        <div className="flex items-center justify-between py-6">
           {/*  LOGO */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-            className="text-xl font-bold tracking-wide"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative group"
           >
-            <Link to="/">
-              <span className="bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
-                Learnify
+            <Link to="/" className="flex items-center gap-2 text-2xl font-black font-header tracking-tighter">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center shadow-neon-cyan/20 group-hover:scale-110 transition-transform duration-300">
+                <Zap className="w-6 h-6 text-black fill-current" />
+              </div>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-cyan-400 group-hover:to-purple-500 transition-all duration-500 uppercase">
+                LEARNIFY
               </span>
             </Link>
           </motion.div>
 
-          
           {/*  BUTTONS */}
-              <motion.div
-                initial={{ opacity: 0, x: 300 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
-                className="flex items-center gap-4"
-              >
-              {!authStatus ? (
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex items-center gap-6"
+          >
+            {!authStatus ? (
               <>
+                <Link 
+                  to="/login" 
+                  className="text-sm font-bold tracking-widest text-gray-400 hover:text-white transition-colors uppercase"
+                >
+                  Sign In
+                </Link>
+                
                 <motion.div
-                 whileHover={{ scale: 1.05, y: -2 }}
-                 whileTap={{ scale: 0.95 }}
-                 transition={{ type: "spring", stiffness: 300 }}
-                 >
-                <Button
-                 
-                  className="text-black rounded-xl bg-green-800 hover:bg-indigo-400 border-black transition  "
-                  asChild
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <Link to="/login">Login</Link>
-                </Button>
+                  <Button
+                    className="h-12 px-8 rounded-xl bg-cyan-400 text-black font-black hover:bg-white shadow-neon-cyan/20 transition-all duration-300"
+                    asChild
+                  >
+                    <Link to="/signup">SIGN UP</Link>
+                  </Button>
                 </motion.div>
-                 <motion.div
-                 whileHover={{ scale: 1.08, y: -2 }}
-                 whileTap={{ scale: 0.95 }}
-                 transition={{ type: "spring", stiffness: 300 }}
-                 >
-
-                <Button
-                  className="rounded-xl bg-white text-black hover:bg-indigo-400  border-black transition"
-                  asChild
+              </>
+            ) : (
+              <div className="flex items-center gap-6">
+                <Link to="/dashboard" className="text-sm font-bold tracking-widest text-gray-400 hover:text-white transition-colors uppercase">
+                   Workspace
+                </Link>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <Link to="/signup">Sign Up</Link>
-                </Button>
+                  <LogOutBtn />
                 </motion.div>
-                </>
-                ) : (
-                  <motion.div
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                 >
-
-              <LogOutBtn/>
-               </motion.div>
+              </div>
             )}
-         </motion.div>
-
+          </motion.div>
         </div>
       </Container>
     </header>
