@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Container from "../components/container/Container";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { easeInOut, motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { 
@@ -29,22 +29,20 @@ function Home() {
  
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Marquee animation for the top ticker
       gsap.to(".ticker-inner", {
-        xPercent: -50,
-        repeat: -1,
-        duration: 20,
-        ease: "none",
+        xPercent: -50,             // animation moves left responsively
+        repeat: -1,                // repeats forever
+        duration: 20,              // higher the duration, slower the animation
+        ease: "none",              // moves at constant speed
       });
- 
-      // Brutalist card entrance animation
+
       gsap.from(".brutalist-card", {
         scrollTrigger: {
           trigger: ".vault-section",
           start: "top 85%",
         },
-        y: 80,
-        opacity: 0,
+        y: 80,                    // card slides upwards
+        opacity: 0,               // starts invisible
         stagger: 0.15,
         duration: 0.8,
         ease: "back.out(1.7)",
@@ -52,13 +50,14 @@ function Home() {
  
       // Floating particles for cyber aesthetic
       gsap.to(".cyber-particle", {
-        y: "random(-40, 40)",
-        x: "random(-40, 40)",
-        duration: "random(3, 6)",
+        y: "random(-300, 300)",                  // random vertical movement
+        x: "random(-300, 300)",                  // random horizontal movement
+        duration: "random(1,2)",
         repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        stagger: 0.2
+        yoyo: true,                             // natural movement
+        stagger: 0.2,                           // particles move at diff times and diff is 0.2 sec
+        ease: "sine.inOut"
+                             
       });
  
     }, containerRef);
@@ -69,7 +68,7 @@ function Home() {
   return (
     <div ref={containerRef} className="relative min-h-screen bg-obsidian text-white overflow-x-hidden font-body selection:bg-cyan-400 selection:text-black">
       
-      {/* 1. STATUS TICKER (MARQUEE) */}
+      {/* moving bar */}
       <div className="fixed top-20 left-0 right-0 z-[60] bg-cyan-400 py-3 border-y-4 border-black overflow-hidden shadow-[0_4px_0_0_#000]">
         <div className="ticker-inner flex whitespace-nowrap">
           {[...Array(10)].map((_, i) => (
@@ -82,10 +81,9 @@ function Home() {
           ))}
         </div>
       </div>
- 
+
+      {/* heading and tagline */}
       <div className="relative z-10 pt-48 pb-20">
-        
-        {/* 2. HERO: THE SPLIT-SCREEN EXPERIENCE */}
         <Container>
           <div className="text-center mb-20 space-y-8">
             <div className="inline-block px-6 py-2 bg-purple-600 border-4 border-black shadow-[4px_4px_0_0_#000] font-black text-xs tracking-widest uppercase">
@@ -94,8 +92,8 @@ function Home() {
             <motion.h1 
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-7xl md:text-[10rem] font-black font-header tracking-tighter leading-[0.75]"
+              transition={{ duration: 1.5, ease:easeInOut}}
+              className="text-7xl md:text-[10rem] font-black font-header tracking-tighter leading-[0.75]"  //leading makes gap btw the two lines very less here
             >
               Learn Faster.
               <br />
@@ -106,13 +104,13 @@ function Home() {
             </p>
           </div>
  
-          {/* SPLIT SHOWCASE MOCKUP */}
+        
           <div className="relative group max-w-6xl mx-auto">
-            <div className="absolute -inset-6 bg-gradient-to-r from-cyan-400 via-purple-500 to-cyan-400 opacity-10 blur-3xl group-hover:opacity-25 transition duration-1000" />
+            <div className="absolute -inset-6 bg-gradient-to-r from-cyan-400 via-purple-500 to-cyan-400 opacity-30 blur-3xl group-hover:opacity-45 transition duration-1000" /> 
             
             <div className="relative grid md:grid-cols-12 bg-black border-[4px] border-white shadow-neo-brutalist overflow-hidden">
               
-              {/* Left Side: Video (Col 7) */}
+              {/*left side :image */}
               <div className="md:col-span-7 relative bg-graphite border-r-[4px] border-white/20 aspect-video md:aspect-auto overflow-hidden">
                 <div className="absolute inset-0 flex items-center justify-center bg-black/50 group-hover:bg-black/30 transition-colors z-20">
                   <div className="w-24 h-24 rounded-full bg-white text-black flex items-center justify-center shadow-neon-cyan hover:scale-110 transition-transform cursor-pointer">
@@ -124,19 +122,9 @@ function Home() {
                   className="w-full h-full object-cover mix-blend-luminosity opacity-40 scale-105 group-hover:scale-100 transition-transform duration-1000"
                   alt="Video Lecture"
                 />
-                <div className="absolute bottom-8 left-8 right-8 z-30 p-5 bg-black/80 backdrop-blur-xl border-2 border-white/10 rounded-2xl">
-                
-                  <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden border border-white/5">
-                    <motion.div 
-                      animate={{ width: ["0%", "45%", "42%", "78%", "75%"] }}
-                      transition={{ duration: 15, repeat: Infinity }}
-                      className="h-full bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_15px_rgba(0,240,255,0.5)]" 
-                    />
-                  </div>
-                </div>
               </div>
  
-              {/* Right Side: AI Learning Workspace */}
+              {/* Right Side: Workspace */}
               <div className="md:col-span-5 bg-[#050505] p-8 flex flex-col h-[600px] border-t-4 md:border-t-0 border-white/20">
  
                 {/* Header */}
@@ -193,32 +181,12 @@ function Home() {
  
                     </ul>
                   </motion.div>
- 
-                  {/* AI Summary */}
- 
-                  <motion.div
-                    initial={{ opacity: 0, x: 30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.6 }}
-                    className="rounded-2xl bg-purple-500/10 border border-purple-500/30 p-4"
-                  >
- 
-                    <p className="text-purple-300 font-semibold mb-2">
-                      ⭐ AI Summary
-                    </p>
- 
-                    <p className="text-gray-400 text-sm leading-6">
-                      Neural Networks learn by repeatedly adjusting weights using
-                      Gradient Descent until prediction error becomes minimal.
-                    </p>
- 
-                  </motion.div>
- 
+
                   {/* Saved */}
  
                   <motion.div
-                    initial={{ opacity: 0, scale: .8 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, x: 30}}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 1 }}
                     className="rounded-2xl border border-green-500/30 bg-green-500/10 p-4 flex items-center justify-between"
                   >
@@ -311,11 +279,11 @@ function Home() {
           </div>
         </Container>
  
-        {/* 3. FEATURE: THE KNOWLEDGE VAULT */}
+        {/* FEATURES */}
         <section className="vault-section py-48 relative">
-          {/* Cyber Particles */}
-          {[...Array(6)].map((_, i) => (
-            <div key={i} className="cyber-particle absolute w-1 h-1 bg-cyan-400/20 rounded-full blur-sm" 
+          {/* Particles */}
+          {[...Array(10)].map((_, i) => (
+            <div key={i} className="cyber-particle absolute w-3 h-3 bg-cyan-100 rounded-full blur-sm" 
                  style={{ top: `${Math.random() * 100}%`, left: `${Math.random() * 100}%` }} />
           ))}
  
@@ -340,7 +308,7 @@ function Home() {
                    </div>
                    <div className="space-y-1">
                       <span className="text-5xl font-black font-header text-purple-500">SYNC</span>
-                      <p className="text-[10px] font-mono text-white/40 uppercase tracking-widest">Native Persistence</p>
+                      <p className="text-[10px] font-mono text-white/40 uppercase tracking-widest">Native Persistence</p>   {/* tracking-widest keeps spacing btw letters more than usual */}
                    </div>
                 </div>
               </div>
@@ -357,7 +325,7 @@ function Home() {
                     whileHover={{ y: -12, scale: 1.02 }}
                     className="brutalist-card p-10 bg-graphite/40 border-4 border-white shadow-neo-brutalist space-y-6 relative overflow-hidden group"
                   >
-                    <div className="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                    <div className="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity"> {/*done for slight icon at bottom of each card*/}
                        <card.icon className="w-32 h-32" />
                     </div>
                     <card.icon className={`w-12 h-12 ${ICON_COLOR_CLASSES[card.color]}`} />
@@ -372,9 +340,9 @@ function Home() {
           </Container>
         </section>
  
-        {/* 4. FEATURE: AI ADAPTIVE QUIZZES */}
+        {/*FEATURE: AI QUIZZES */}
         <section className="py-48 bg-white text-black relative overflow-hidden">
-          {/* Brutalist Stripe */}
+          {/* Stripe -skew-x-12 makes the stripe tilt vertical*/}
           <div className="absolute top-0 right-0 w-1/3 h-full bg-cyan-400 -skew-x-12 translate-x-20 opacity-20" />
           
           <Container>
@@ -399,14 +367,15 @@ function Home() {
               </div>
  
               <div className="lg:col-span-7 relative">
-                <div className="absolute -inset-4 border-4 border-black opacity-10 rotate-2 translate-x-4" />
+                <div className="absolute -inset-4 border-4 border-black opacity-10 rotate-2 translate-x-4" /> {/* for the titled border*/}
                 <div className="relative p-12 bg-white border-[6px] border-black shadow-[20px_20px_0_0_#000]">
-                  <div className="flex items-center justify-between mb-12">
-                    <div className="flex items-center gap-4">
+                  <div className="flex items-center justify-between mb-12">  {/* for btw assessment and timer*/}
+                    <div className="flex items-center gap-4">  {/* for btw icon and assessment*/}
                       <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center text-white">
                          <Brain className="w-6 h-6" />
                       </div>
-                      <span className="font-black font-header tracking-widest uppercase text-sm">Assessment_1</span></div>
+                      <span className="font-black font-header tracking-widest uppercase text-sm">Assessment_1</span>
+                      </div>
                   <div className="px-4 py-1 border-2 border-black font-mono text-[10px] font-black uppercase">Timer: 00:45
                     </div> </div>
  
@@ -424,7 +393,7 @@ function Home() {
                       ].map((ans, i) => (
                         <button key={i} className="group w-full p-8 text-left border-[4px] border-black font-black text-xl flex justify-between items-center hover:bg-black hover:text-white transition-all transform hover:-translate-y-1 active:translate-y-0 shadow-[4px_4px_0_0_#000] hover:shadow-[8px_8px_0_0_#000]">
                           <span className="flex gap-6">
-                             <span className="text-gray-400">0{i+1}</span>
+                             <span className="text-gray-400">0{i+1}</span>  {/* for displaying numbers like 01,02 etc */}
                              {ans}
                           </span>
                           <div className="w-8 h-8 border-4 border-black rounded-full group-hover:border-white transition-colors relative">

@@ -2,11 +2,11 @@ import Container from "../container/Container";
 
 function Footer() {
   return (
-    <footer className="bg-black text-gray-400 mt-20">
+    <footer className="bg-black text-gray-400 ">
       <Container>
         <div className="py-12 text-center space-y-3">
-          <h2 className="text-xl font-semibold text-white">Learnify</h2>
-          <p className="text-sm">
+          <h2 className="text-4xl font-semibold text-white tracking-wide">Learnify</h2>
+          <p className="text-lg tracking-widest">
             Learn smarter. Build faster.
           </p>
           <p className="text-xs text-gray-600">

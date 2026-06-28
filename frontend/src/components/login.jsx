@@ -46,69 +46,35 @@ function Login() {
   };
 
   return (
-    <div className="relative min-h-screen bg-black text-white overflow-hidden flex items-center justify-center">
-
-      {/* Animated Background */}
-
-      <div className="absolute inset-0 overflow-hidden">
-
-        <motion.div
-          animate={{
-            x: [0, 50, -50, 0],
-            y: [0, -50, 50, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-          }}
-          className="absolute top-[-150px] left-[-150px] w-[500px] h-[500px] bg-purple-500/30 blur-[140px] rounded-full"
-        />
-
-        <motion.div
-          animate={{
-            x: [0, -60, 60, 0],
-            y: [0, 60, -60, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-          }}
-          className="absolute bottom-[-150px] right-[-150px] w-[500px] h-[500px] bg-pink-600/30 blur-[140px] rounded-full"
-        />
-
-        <motion.div
-          animate={{
-            y: [0, -30, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-          }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-sky-500/20 blur-[120px] rounded-full"
-        />
-
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:40px_40px]" />
-
-      </div>
+   
 
       <Container>
 
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
+         initial={{
+    opacity:0,
+    scale:0.85,
+   
+}}
+
+animate={{
+    opacity:1,
+    scale:1,
+   
+}}
           transition={{ duration: 0.8 }}
           className="relative z-10 w-full mx-auto max-w-md"
         >
 
           <div
             className="
-              backdrop-blur-3xl
-              bg-white/10
-              border
-              border-white/20
-              rounded-3xl
-              p-10
-              shadow-[0_0_60px_rgba(168,85,247,0.15)]
+            bg-black/20
+            backdrop-blur-xl
+            border-4
+            border-white
+            shadow-neo-brutalist
+            rounded-3xl
+           
             "
           >
 
@@ -118,17 +84,10 @@ function Login() {
 
               <h1
                 className="
-                  text-5xl
-                  font-bold
-                  bg-gradient-to-r
-                  from-purple-800
-                  to-pink-600
-                  
-                  bg-clip-text
-                  text-transparent
+               font-header text-4xl font-black tracking-tight uppercase
                 "
               >
-                Welcome Back!!
+                Welcome <br/>Back!!
               </h1>
 
               <p className="text-gray-400 mt-4">
@@ -173,7 +132,7 @@ function Login() {
                   type="email"
                   placeholder="Enter your email"
                   className="
-                    mt-2
+                mt-2
                     h-12
                     bg-white/5
                     border-white/10
@@ -181,12 +140,10 @@ function Login() {
                     placeholder:text-gray-500
                     rounded-xl
                     focus:ring-2
-                    focus:ring-purple-500
+                    focus:border-cyan-400
                     hover:[1.02]
-                  transition-all
-                  duration-300
-                  shadow-lg
-                  shadow-purple-500/30
+                     transition-all
+                     duration-300
                   "
                   {...register("email", {
                     required: "Email is required",
@@ -225,12 +182,12 @@ function Login() {
                     placeholder:text-gray-500
                     rounded-xl
                     focus:ring-2
-                    focus:ring-purple-500
+                    focus:border-cyan-400
                     hover:[1.02]
                      transition-all
                      duration-300
-                    shadow-lg
-                    shadow-purple-500/30
+                    
+                   
                   "
                   {...register("password", {
                     required: "Password is required",
@@ -248,20 +205,20 @@ function Login() {
               <Button
                 type="submit"
                 className="
-                  w-full
-                  h-12
-                  rounded-xl
-                  font-semibold
-                  bg-gradient-to-r
-                  from-purple-800
-                  to-pink-600
-                  border-black
-                  
-                  hover:scale-[1.02]
-                  transition-all
-                  duration-300
-                  shadow-lg
-                  shadow-purple-500/30
+                 w-full
+h-14
+bg-cyan-400
+text-black
+font-black
+uppercase
+tracking-wider
+border-4
+border-black
+hover:bg-white
+transition-all
+rounded-lg
+hover:translate-x-1
+hover:translate-y-1
                 "
               >
                 Sign In
@@ -292,7 +249,7 @@ function Login() {
 
       </Container>
 
-    </div>
+    
   );
 }
 
