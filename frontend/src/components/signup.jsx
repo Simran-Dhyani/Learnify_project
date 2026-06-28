@@ -47,35 +47,12 @@ function SignUp() {
 };
   
     return (
-  <div className="relative min-h-screen bg-black text-white overflow-hidden flex items-center justify-center">
+   <div className="relative z-10 min-h-screen flex items-center justify-center text-white">
 
-    {/* Animated Background */}
-
-    <div className="absolute inset-0 overflow-hidden">
-
-      <motion.div
-        animate={{ x: [0, 50, -50, 0], y: [0, -50, 50, 0] }}
-        transition={{ duration: 20, repeat: Infinity }}
-        className="absolute top-[-150px] left-[-150px] w-[500px] h-[500px] bg-purple-500 opacity-30 blur-[140px] rounded-full"
-      />
-
-      <motion.div
-        animate={{ x: [0, -60, 60, 0], y: [0, 60, -60, 0] }}
-        transition={{ duration: 25, repeat: Infinity }}
-        className="absolute bottom-[-150px] right-[-150px] w-[500px] h-[500px] bg-pink-600 opacity-30 blur-[140px] rounded-full"
-      />
-
-      <motion.div
-        animate={{ y: [0, -30, 0] }}
-        transition={{ duration: 10, repeat: Infinity }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-sky-500 opacity-20 blur-[120px] rounded-full"
-      />
-
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:40px_40px]" />
-
-    </div>
 
     <Container>
+      <div className="flex justify-center items-center min-h-screen">
+      
       <motion.div
         initial={{ opacity: 0, y: 80 }}
         animate={{ opacity: 1, y: 0 }}
@@ -85,12 +62,15 @@ function SignUp() {
 
         <div
           className="
-          backdrop-blur-2xl
-          bg-white/10
-          border border-white/20
-          shadow-2xl
-          rounded-3xl
-          p-8
+         relative
+bg-[#050505]
+border-[4px]
+border-white
+shadow-neo-brutalist
+p-10
+max-w-xl
+w-full
+rounded-2xl
           "
         >
 
@@ -98,11 +78,16 @@ function SignUp() {
 
           <div className="text-center mb-8">
 
-            <h1 className="text-4xl font-bold">
-              Create Your
-              <span className="block bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
-                Learnify Account
-              </span>
+            <h1 className="font-header
+font-black
+text-6xl
+tracking-tighter
+uppercase
+leading-none">
+              Create <br/>
+               <span className="text-cyan-400">
+               Account
+               </span>
             </h1>
 
             <p className="text-gray-400 mt-4">
@@ -125,14 +110,15 @@ function SignUp() {
             <Input
               placeholder="Full Name"
               className="
-              h-12 rounded-xl bg-white/10 border-white/20 text-white placeholder:text-gray-400
+              h-12 
+        rounded-xl bg-white/10 border-white/20 text-white placeholder:text-gray-400
                focus:ring-2
-                    focus:ring-purple-500
+                    focus:ring-cyan-500
                     hover:[1.02]
                      transition-all
                      duration-300
                     shadow-lg
-                    shadow-purple-500/30
+                    shadow-cyan-500/30
               "
               {...register("fullname", {
                 required: "Full name is required",
@@ -144,12 +130,12 @@ function SignUp() {
               className="
               h-12 rounded-xl bg-white/10 border-white/20 text-white placeholder:text-gray-400
                focus:ring-2
-                    focus:ring-purple-500
+                    focus:ring-cyan-500
                     hover:[1.02]
                      transition-all
                      duration-300
                     shadow-lg
-                    shadow-purple-500/30
+                    shadow-cyan-500/30
               "
               {...register("username", {
                 required: "Username is required",
@@ -162,12 +148,12 @@ function SignUp() {
               className="
               h-12 rounded-xl bg-white/10 border-white/20 text-white placeholder:text-gray-400
                focus:ring-2
-                    focus:ring-purple-500
+                    focus:ring-cyan-500
                     hover:[1.02]
                      transition-all
                      duration-300
                     shadow-lg
-                    shadow-purple-500/30"
+                    shadow-cyan-500/30"
               {...register("email", {
                 required: "Email is required",
               })}
@@ -179,12 +165,12 @@ function SignUp() {
               className="
               h-12 rounded-xl bg-white/10 border-white/20 text-white placeholder:text-gray-400
                focus:ring-2
-                    focus:ring-purple-500
+                    focus:ring-cyan-500
                     hover:[1.02]
                      transition-all
                      duration-300
                     shadow-lg
-                    shadow-purple-500/30"
+                    shadow-cyan-500/30"
               {...register("password", {
                 required: "Password is required",
               })}
@@ -201,12 +187,12 @@ function SignUp() {
                 className="
                 mt-2 bg-white/10 border-white/20 text-gray-300
                  focus:ring-2
-                    focus:ring-purple-500
+                    focus:ring-cyan-500
                     hover:[1.02]
                      transition-all
                      duration-300
                     shadow-lg
-                    shadow-purple-500/30
+                    shadow-cyan-500/30
                 "
                 {...register("avatar", {
                   required: "Avatar is required",
@@ -230,17 +216,21 @@ function SignUp() {
             <Button
               type="submit"
               className="
-              w-full
-              h-12
-              rounded-xl
-              bg-gradient-to-r
-              from-purple-600
-              to-blue-600
-              hover:from-purple-700
-              hover:to-blue-700
-              transition-all
-              duration-300
-              hover:scale-[1.02]
+             w-full
+h-14
+bg-cyan-400
+text-black
+font-black
+uppercase
+tracking-wider
+rounded-xl
+border-4
+border-black
+shadow-[6px_6px_0_0_#000]
+hover:translate-x-1
+hover:translate-y-1
+hover:shadow-none
+transition-all
               "
             >
               Create Account
@@ -271,9 +261,10 @@ function SignUp() {
         </div>
 
       </motion.div>
+    </div>
     </Container>
-
-  </div>
+</div>
+  
 );
   
 }

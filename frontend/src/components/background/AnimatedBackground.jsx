@@ -24,7 +24,7 @@ function AnimatedBackground() {
         w-[500px]
         h-[500px]
         rounded-full
-        bg-cyan-500
+        bg-cyan-800
         blur-[150px]
         "
       />
@@ -48,7 +48,7 @@ function AnimatedBackground() {
         w-[500px]
         h-[500px]
         rounded-full
-        bg-purple-500
+        bg-purple-800
         blur-[150px]
         "
       />

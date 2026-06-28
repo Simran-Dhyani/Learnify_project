@@ -27,7 +27,7 @@ function Particles() {
     return (
 
         <>
-        {[...Array(15)].map((_,i)=>(
+        {[...Array(10)].map((_,i)=>(
 
             <div
 

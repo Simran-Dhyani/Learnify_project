@@ -1,8 +1,12 @@
 import React from "react";
 import {SignUp as SignUpComponent}from "../components/index";
+import AnimatedBackground from "@/components/background/animatedBackground";
 function SignUp(){
     return (
-    <div className="py-8">
+     
+    <div className="relative min-h-screen bg-black overflow-hidden">
+
+       <AnimatedBackground/>
         <SignUpComponent/>
 
       </div>

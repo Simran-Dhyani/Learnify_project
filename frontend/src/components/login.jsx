@@ -87,7 +87,7 @@ animate={{
                font-header text-4xl font-black tracking-tight uppercase
                 "
               >
-                Welcome <br/>Back!!
+                Welcome <br/><span className="text-cyan-400">Back !!</span>
               </h1>
 
               <p className="text-gray-400 mt-4">
@@ -139,8 +139,11 @@ animate={{
                     text-white
                     placeholder:text-gray-500
                     rounded-xl
-                    focus:ring-2
-                    focus:border-cyan-400
+                      shadow-lg
+                    shadow-cyan-500/30
+                     focus:ring-2
+                    focus:ring-cyan-500
+                  
                     hover:[1.02]
                      transition-all
                      duration-300
@@ -181,8 +184,10 @@ animate={{
                     text-white
                     placeholder:text-gray-500
                     rounded-xl
-                    focus:ring-2
-                    focus:border-cyan-400
+                    shadow-lg
+                    shadow-cyan-500/30
+                     focus:ring-2
+                    focus:ring-cyan-500
                     hover:[1.02]
                      transition-all
                      duration-300
