@@ -28,7 +28,7 @@ function Navbar({searchQuery,setSearchQuery}) {
             rounded-2xl
             border
             border-white/40
-            bg-white/60
+            bg-white/20
             backdrop-blur-xl
             shadow-md
             outline-none
@@ -36,6 +36,8 @@ function Navbar({searchQuery,setSearchQuery}) {
             focus:ring-purple-300
             transition
              hover:shadow-purple-500
+             text-black
+            
           "
         />
 

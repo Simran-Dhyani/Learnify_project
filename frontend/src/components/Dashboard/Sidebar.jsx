@@ -54,7 +54,7 @@ function Sidebar() {
 
         <div className="mb-10">
 
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-950 to-cyan-500 bg-clip-text text-transparent">
             Learn Smartly
           </h1>
 

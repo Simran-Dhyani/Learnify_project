@@ -119,7 +119,7 @@ function Watch() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-pink-50 p-6">
+    <div className="min-h-screen bg-gradient-to-br  from-slate-900 via-slate-950 to-gray-950 ">
       <div className="max-w-7xl mx-auto">
         <Card className="overflow-hidden rounded-3xl border-0 shadow-2xl p-5">
           <h1 className="text-3xl font-bold mb-5">{videoTitle || "Video"}</h1>
@@ -148,7 +148,7 @@ function Watch() {
               className="w-full text-slate-950 h-52 p-5 rounded-2xl border border-gray-200 resize-none outline-none focus:ring-2 focus:ring-purple-500"
             />
 
-            <Button type="submit" className="mt-4 w-full h-12 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-500">
+            <Button type="submit" className="mt-4 w-full h-12 rounded-2xl bg-gradient-to-r from-purple-950 to-cyan-900  hover:scale-110 border-blue-200 border-x-4 transition ">
               {editingId ? "Update Note" : "Save Note"}
             </Button>
           </form>

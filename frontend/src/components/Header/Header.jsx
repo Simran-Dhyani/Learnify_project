@@ -22,10 +22,10 @@ function Header() {
             className="relative group"
           >
             <Link to="/" className="flex items-center gap-2 text-2xl font-black font-header tracking-tighter">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center shadow-neon-cyan/20 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-900 to-purple-900 flex items-center justify-center shadow-neon-cyan/20 group-hover:scale-110 transition-transform duration-300">
                 <Zap className="w-6 h-6 text-black fill-current" />
               </div>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-cyan-400 group-hover:to-purple-500 transition-all duration-500 uppercase">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white  to-cyan-900 group-hover:to-purple-950 transition-all duration-500 uppercase">
                 LEARNIFY
               </span>
             </Link>

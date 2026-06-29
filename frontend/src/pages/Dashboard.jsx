@@ -25,7 +25,7 @@ function Dashboard() {
 
   return (
 
-    <div className="flex min-h-screen bg-gradient-to-br from-[#fdfbff] via-[#f7f7ff] to-[#eef4ff]">
+    <div className="flex min-h-screen bg-gradient-to-br from-slate-900 via-slate-950 to-gray-950">
 
       <Sidebar />
 

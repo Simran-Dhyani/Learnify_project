@@ -83,7 +83,7 @@ function VideoCard({ video }) {
           className="
             text-lg
             font-semibold
-            text-gray-800
+            text-white
             line-clamp-2
           "
         >

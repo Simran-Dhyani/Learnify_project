@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import { getNotes } from "@/services/myNotesService";
 import { Link } from "react-router-dom";
 import { NotebookPen } from "lucide-react";
@@ -20,7 +20,7 @@ function MyNotes() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-pink-50 p-8">
+    <div className="min-h-screen bg-gradient-to-br  from-slate-900 via-slate-950 to-gray-950 ">
       <div className="max-w-7xl mx-auto">
         <div className="mb-10">
           <h1 className="text-4xl font-bold flex items-center gap-3">
@@ -76,7 +76,7 @@ function MyNotes() {
                     state={{
                       videoTitle: video.videoTitle,
                     }}
-                    className="flex justify-center items-center rounded-2xl bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold py-3 hover:scale-105 transition"
+                    className="flex justify-center items-center rounded-2xl bg-gradient-to-r from-purple-950 to-cyan-900 text-white font-semibold py-3 hover:scale-105 transition"
                   >
                     Continue Learning
                   </Link>
