@@ -1,218 +1,82 @@
-﻿import React, { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-
-import {
-  saveNotes,
-  getNotes,
-  updateNote,
-  deleteNote,
-} from "@/services/noteService";
-
-import { generateQuiz } from "@/services/aiQuizService";
-import { fetchVideoTitle } from "@/services/youtubeService";
+﻿import AnimatedBackground from "@/components/background/AnimatedBackground";
+import VideoPlayer from "@/components/watch/VideoPlayer";
+import { useEffect,useState } from "react";
+import { useParams,useLocation } from "react-router-dom";
+import WorkspaceHeader from "@/components/watch/WorkspaceHeader";
+import { Container } from "@/components";
+import NoteEditor from "@/components/watch/NoteEditor";
+//import Workspace from "@/components/watch/Workspace";
+//import SavedNotes from "@/components/watch/SavedNotes";
 
 function Watch() {
-  const { id } = useParams();
-  const location = useLocation();
+const {id}=useParams();
+const location = useLocation();
+const [videoTitle, setVideoTitle] = useState(location.state?.videoTitle || "");
+const [note, setNote] = useState("");
+const[editingId,setEditingId]=useState("");
 
-  const [videoTitle, setVideoTitle] = useState(location.state?.videoTitle || "");
-  const [note, setNote] = useState("");
-  const [notes, setNotes] = useState([]);
-  const [editingId, setEditingId] = useState(null);
-  const [quiz, setQuiz] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const loadWatchData = async () => {
-      const fetchedNotes = await fetchNotes();
-
-      if (location.state?.videoTitle) {
+useEffect(()=>{
+          if (location.state?.videoTitle) {
         setVideoTitle(location.state.videoTitle);
         return;
-      }
+      }},[])
 
-      if (fetchedNotes.length > 0 && fetchedNotes[0].videoTitle) {
-        setVideoTitle(fetchedNotes[0].videoTitle);
-        return;
-      }
+const handleSave = async () => {
+  try {
+    if (!note.trim()) return;
 
-      try {
-        const title = await fetchVideoTitle(id);
-        setVideoTitle(title || `YouTube Video ${id}`);
-      } catch (error) {
-        console.log(error);
-        setVideoTitle(`YouTube Video ${id}`);
-      }
-    };
-
-    loadWatchData();
-  }, [id, location.state?.videoTitle]);
-
-  const fetchNotes = async () => {
-    try {
-      const data = await getNotes(id);
-      setNotes(data);
-      return data;
-    } catch (error) {
-      console.log(error);
-      setNotes([]);
-      return [];
-    }
-  };
-
-  const handleSave = async () => {
-    try {
-      if (!note.trim()) return;
-
-      if (editingId) {
-        await updateNote(editingId, note);
-        setEditingId(null);
-      } else {
-        await saveNotes({
-          videoId: id,
-          videoTitle: videoTitle || `YouTube Video ${id}`,
-          content: note,
-        });
-      }
-
-      setNote("");
-      await fetchNotes();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleDelete = async (noteId) => {
-    try {
-      await deleteNote(noteId);
-      await fetchNotes();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleEdit = (selectedNote) => {
-    setNote(selectedNote.content);
-    setEditingId(selectedNote._id);
-  };
-
-  const quizGenerate = async () => {
-    try {
-      const noteText = notes.map((savedNote) => savedNote.content).join("\n").trim();
-      const title = videoTitle || `YouTube Video ${id}`;
-
-      setLoading(true);
-
-      const quizData = await generateQuiz({
-        videoTitle: title,
-        notes: noteText,
+    if (editingId) {
+      await updateNote(editingId, note);
+      setEditingId(null);
+    } else {
+      await saveNotes({
+        videoId: id,
+        videoTitle: videoTitle || `YouTube Video ${id}`,
+        content: note,
       });
-
-      setQuiz(quizData);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
     }
-  };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br  from-slate-900 via-slate-950 to-gray-950 ">
-      <div className="max-w-7xl mx-auto">
-        <Card className="overflow-hidden rounded-3xl border-0 shadow-2xl p-5">
-          <h1 className="text-3xl font-bold mb-5">{videoTitle || "Video"}</h1>
+    setNote("");
+    await fetchNotes();
 
-          <iframe
-            className="w-full aspect-video rounded-2xl"
-            src={`https://www.youtube.com/embed/${id}`}
-            title={videoTitle || "YouTube Video Player"}
-            allowFullScreen
-          />
-        </Card>
+  } catch (error) {
+    console.log(error);
+  }
+};
+    return (
 
-        <Card className="mt-8 p-6 rounded-3xl bg-white/70 backdrop-blur-xl border-0 shadow-xl">
-          <h2 className="text-2xl text-slate-950 font-bold mb-4">Take Notes</h2>
+        <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-slate-950 to-gray-950 ">
 
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSave();
-            }}
-          >
-            <textarea
-              value={note}
-              onChange={(e) => setNote(e.target.value)}
-              placeholder="Capture key concepts, ideas and insights..."
-              className="w-full text-slate-950 h-52 p-5 rounded-2xl border border-gray-200 resize-none outline-none focus:ring-2 focus:ring-purple-500"
+           <Container>
+
+        <WorkspaceHeader />
+        {/* <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 space-y-16">*/}
+            <VideoPlayer
+             videoId={id}
+             videoTitle={videoTitle}
             />
+  
+               <NoteEditor 
+               note={note}
+               setNote={setNote}
+               handleSave={handleSave}
 
-            <Button type="submit" className="mt-4 w-full h-12 rounded-2xl bg-gradient-to-r from-purple-950 to-cyan-900  hover:scale-110 border-blue-200 border-x-4 transition ">
-              {editingId ? "Update Note" : "Save Note"}
-            </Button>
-          </form>
-        </Card>
+               />
 
-        <div className="mt-10">
-          <h2 className="text-2xl font-bold mb-6">Saved Notes</h2>
+               {/*<SavedNotes />*/}
 
-          <div className="grid md:grid-cols-2 gap-5">
-            {notes.map((savedNote) => (
-              <Card
-                key={savedNote._id}
-                className="p-5 rounded-3xl bg-white/80 backdrop-blur-xl border-0 shadow-lg hover:shadow-purple-300/40 transition"
-              >
-                <p className="text-gray-700 leading-relaxed">{savedNote.content}</p>
+           {/* </div> */}
 
-                <div className="flex gap-3 mt-5">
-                  <Button variant="outline" onClick={() => handleEdit(savedNote)}>
-                    Edit
-                  </Button>
+    </Container>
 
-                  <Button  className="bg-slate-950 text-white px-5 py-2 rounded-md"  onClick={() => handleDelete(savedNote._id)}>
-                    Delete
-                  </Button>
-                </div>
-              </Card>
-            ))}
-          </div>
+
+
+           
+
         </div>
 
-        <Card className="mt-10 p-6 rounded-3xl bg-white shadow-xl">
-          <div className="flex justify-between items-center mb-5">
-            <h2 className="text-2xl font-bold text-slate-950">AI Quiz</h2>
+    );
 
-            <Button className="bg-purple-600 text-white px-5 py-2 rounded" onClick={quizGenerate} disabled={loading || !videoTitle}>
-              {loading ? "Generating..." : "Generate Quiz"}
-            </Button>
-          </div>
-
-          {quiz && (
-            <div className="space-y-6 ">
-              <h3 className="text-xl font-semibold  text-slate-950">{quiz.quizTitle}</h3>
-
-              {quiz.questions.map((question, index) => (
-                <div key={index} className="border rounded-2xl p-4  text-slate-950">
-                  <p className="font-medium mb-3">
-                    {index + 1}. {question.question}
-                  </p>
-
-                  <div className="grid gap-2">
-                    {question.options.map((option, idx) => (
-                      <Button key={idx} variant="outline" className="justify-start text-white ">
-                        {option}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </Card>
-      </div>
-    </div>
-  );
 }
 
 export default Watch;

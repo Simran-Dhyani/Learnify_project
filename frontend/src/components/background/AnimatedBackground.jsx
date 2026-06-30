@@ -4,7 +4,7 @@ import Particles from "./Particles.jsx";
 function AnimatedBackground() {
   return (
    
-    <div className="absolute inset-0 overflow-hidden ">
+    <div className="absolute inset-0 overflow-hidden  ">
 
       {/* Cyan Glow */}
       <motion.div
