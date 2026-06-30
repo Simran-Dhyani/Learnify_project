@@ -113,7 +113,7 @@ const {accessToken,refreshToken}= await generateAccessAndRefreshTokens(user._id)
 const loggedInUser= await User.findById(user._id).select("-password -refreshToken")
 const options={
     httpOnly:true,
-    secure:false,
+    secure:true,
     sameSite:"none"
 
 }
@@ -135,7 +135,7 @@ new:true
 )
 const options={
     httpOnly:true,
-    secure:false,
+    secure:true,
     sameSite:"none"
 }
 return res.status(200).clearCookie("accessToken",options).clearCookie("refreshToken",options)
