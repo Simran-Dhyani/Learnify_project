@@ -1,22 +1,17 @@
 import React from "react";
 import TinyEditor from "../editor/TinyEditor";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 
-
-function NoteEditor({note,setNote,handleSave,editingId}){
-const [editor, setEditor] = useState(null);
-useEffect(() => {
-
-    if(editor){
-
-        setEditor(editor);
-
+function NoteEditor({ note, setNote, handleSave, editingId }) {
+  const [editor, setEditor] = useState(null);
+  useEffect(() => {
+    if (editor) {
+      setEditor(editor);
     }
-
-}, [editor]);
-    return (
-        <div
-className="
+  }, [editor]);
+  return (
+    <div
+      className="
 bg-[#050505]
 border-[4px]
 border-white
@@ -26,10 +21,9 @@ min-h-[700px]
 flex
 flex-col
 "
->
-
-    <div
-    className="
+    >
+      <div
+        className="
     px-8
     py-5
     border-b
@@ -37,37 +31,22 @@ flex-col
     flex
     justify-between
     "
-    >
-
+      >
         <div>
+          <p className="text-cyan-400 uppercase tracking-[0.25em] text-xs font-bold">
+            Notes
+          </p>
 
-            <p className="text-cyan-400 uppercase tracking-[0.25em] text-xs font-bold">
-
-                Notes
-
-            </p>
-
-            <h2 className="text-2xl font-black mt-2">
-
-                Workspace
-
-            </h2>
-
+          <h2 className="text-2xl font-black mt-2">Workspace</h2>
         </div>
-
-    </div>
-<div className="p-8">
-
-  <TinyEditor
-  
-  note={note}
-
-setNote={setNote}
-
-setEditor={setEditor}
-
-    placeholder="Capture important concepts while watching..."
-    className="
+      </div>
+      <div className="p-8">
+        <TinyEditor
+          note={note}
+          setNote={setNote}
+          setEditor={setEditor}
+          placeholder="Capture important concepts while watching..."
+          className="
     w-full
     min-h-[450px]
     bg-transparent
@@ -78,11 +57,10 @@ setEditor={setEditor}
     text-white
     placeholder:text-gray-500
     "
-/>
-
-</div>
-<div
-className="
+        />
+      </div>
+      <div
+        className="
 border-t
 border-white/10
 px-8
@@ -91,10 +69,10 @@ flex
 justify-between
 items-center
 "
->
-    <button
-    onClick={handleSave}
-    className="
+      >
+        <button
+          onClick={handleSave}
+          className="
     px-6
     py-3
     bg-cyan-400
@@ -108,15 +86,12 @@ items-center
     hover:translate-y-1
     hover:shadow-none
     transition-all
-    ">
-        {editingId ? "Update Note" : "Save Note"}
-    </button>
-
-    
-
-</div>
-</div>
-    )
-
+    "
+        >
+          {editingId ? "Update Note" : "Save Note"}
+        </button>
+      </div>
+    </div>
+  );
 }
 export default NoteEditor;

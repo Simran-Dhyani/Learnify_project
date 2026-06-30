@@ -28,7 +28,9 @@ function MyNotes() {
             My Notes
           </h1>
 
-          <p className="text-gray-500 mt-2">Continue learning from where you left off.</p>
+          <p className="text-gray-500 mt-2">
+            Continue learning from where you left off.
+          </p>
         </div>
 
         {videos.length === 0 ? (
@@ -36,7 +38,8 @@ function MyNotes() {
             <h2 className="text-2xl font-semibold">No Notes Yet</h2>
 
             <p className="text-gray-500 mt-3">
-              Start watching videos and save notes to build your learning library.
+              Start watching videos and save notes to build your learning
+              library.
             </p>
           </div>
         ) : (

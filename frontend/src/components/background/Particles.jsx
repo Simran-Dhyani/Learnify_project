@@ -2,38 +2,28 @@ import { useEffect } from "react";
 import { gsap } from "gsap";
 
 function Particles() {
+  useEffect(() => {
+    gsap.to(".cyber-particle", {
+      x: "random(-300,300)",
+      y: "random(-300,300)",
 
-    useEffect(() => {
+      duration: "random(1,2)",
 
-        gsap.to(".cyber-particle",{
+      repeat: -1,
 
-            x:"random(-300,300)",
-            y:"random(-300,300)",
+      yoyo: true,
 
-            duration:"random(1,2)",
+      ease: "sine.inOut",
 
-            repeat:-1,
+      stagger: 0.2,
+    });
+  }, []);
 
-            yoyo:true,
-
-            ease:"sine.inOut",
-
-            stagger:0.2
-
-        });
-
-    },[]);
-
-    return (
-
-        <>
-        {[...Array(10)].map((_,i)=>(
-
-            <div
-
-            key={i}
-
-           
+  return (
+    <>
+      {[...Array(10)].map((_, i) => (
+        <div
+          key={i}
           className="
 cyber-particle
 absolute
@@ -45,23 +35,16 @@ bg-cyan-100
 blur-sm
 
             "
-
-            style={{
-
-                top:`${Math.random()*100}%`,
-                left:`${Math.random()*100}%`,
-                right:`${Math.random()*100}%`,
-                bottom:`${Math.random()*100}%`
-
-            }}
-
-            />
-
-        ))}
-        </>
-
-    );
-
+          style={{
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            right: `${Math.random() * 100}%`,
+            bottom: `${Math.random() * 100}%`,
+          }}
+        />
+      ))}
+    </>
+  );
 }
 
 export default Particles;

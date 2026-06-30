@@ -8,15 +8,19 @@ function LogOutBtn(){
     const dispatch=useDispatch();
     const navigate=useNavigate();
 
-    const logOutHandler=async()=>{
-        try {
-            await authService.logout();
-        } finally {
-            dispatch(logout());
-            navigate("/");
-        }
+    const logOutHandler = async () => {
+    console.log("Logout clicked");
+
+    try {
+        const res = await authService.logout();
+        console.log("Logout response:", res);
+    } catch (err) {
+        console.log("Logout error:", err.response || err);
     }
 
+    dispatch(logout());
+    navigate("/");
+}
     return(
         <button
             className="inline-flex h-10 min-w-24 items-center justify-center rounded-xl bg-purple-900 px-4 text-sm font-semibold text-white transition hover:bg-blue-950"

@@ -1,23 +1,16 @@
 import React from "react";
 
-function Workspace(){
-    <div className="grid lg:grid-cols-12 gap-8">
-
+function Workspace() {
+  <div className="grid lg:grid-cols-12 gap-8">
     <div className="lg:col-span-8">
-
-        <NoteEditor/>
-
+      <NoteEditor />
     </div>
 
     <div className="lg:col-span-4 space-y-8">
+      <AISummary />
 
-        <AISummary/>
-
-        <QuizPanel/>
-
+      <QuizPanel />
     </div>
-
-</div>
-
+  </div>;
 }
 export default Workspace;

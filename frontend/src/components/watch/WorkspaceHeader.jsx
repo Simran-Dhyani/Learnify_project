@@ -1,11 +1,9 @@
 import { Brain } from "lucide-react";
 
-function WorkspaceHeader( ) {
+function WorkspaceHeader() {
   return (
     <div className="space-y-5 mb-16">
-
       <div className="inline-flex items-center gap-3">
-
         <Brain className="w-5 h-5 text-cyan-400" />
 
         <span
@@ -19,7 +17,6 @@ function WorkspaceHeader( ) {
         >
           AI Workspace
         </span>
-
       </div>
 
       <h1
@@ -35,22 +32,14 @@ function WorkspaceHeader( ) {
       >
         Learn.
         <br />
-
-        <span className="text-cyan-400">
-          Build.
-        </span>
-
+        <span className="text-cyan-400">Build.</span>
         <br />
-
         Remember.
       </h1>
 
       <p className="max-w-3xl text-xl text-gray-400 leading-relaxed">
-
-        Watch your lecture, take structured notes,
-        save everything automatically and generate quizzes
-        whenever you're ready.
-
+        Watch your lecture, take structured notes, save everything automatically
+        and generate quizzes whenever you're ready.
       </p>
     </div>
   );

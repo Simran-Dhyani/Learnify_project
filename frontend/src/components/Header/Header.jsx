@@ -9,6 +9,7 @@ import { Zap } from "lucide-react";
 
 function Header() {
   const authStatus = useSelector((state) => state.auth.status);
+  console.log("Header authStatus:", authStatus);
 
   return (
     <header className="sticky top-0 left-0 right-0 z-[100] backdrop-blur-2xl bg-black border-b border-white/5">
@@ -21,7 +22,10 @@ function Header() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="relative group"
           >
-            <Link to="/" className="flex items-center gap-2 text-2xl font-black font-header tracking-tighter">
+            <Link
+              to="/"
+              className="flex items-center gap-2 text-2xl font-black font-header tracking-tighter"
+            >
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-900 to-purple-900 flex items-center justify-center shadow-neon-cyan/20 group-hover:scale-110 transition-transform duration-300">
                 <Zap className="w-6 h-6 text-black fill-current" />
               </div>
@@ -40,13 +44,13 @@ function Header() {
           >
             {!authStatus ? (
               <>
-                <Link 
-                  to="/login" 
+                <Link
+                  to="/login"
                   className="text-sm font-bold tracking-widest text-gray-400 hover:text-white transition-colors uppercase"
                 >
                   Sign In
                 </Link>
-                
+
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -61,8 +65,11 @@ function Header() {
               </>
             ) : (
               <div className="flex items-center gap-6">
-                <Link to="/dashboard" className="text-sm font-bold tracking-widest text-gray-400 hover:text-white transition-colors uppercase">
-                   Workspace
+                <Link
+                  to="/dashboard"
+                  className="text-sm font-bold tracking-widest text-gray-400 hover:text-white transition-colors uppercase"
+                >
+                  Workspace
                 </Link>
                 <motion.div
                   whileHover={{ scale: 1.05 }}
