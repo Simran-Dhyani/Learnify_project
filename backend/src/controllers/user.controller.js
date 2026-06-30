@@ -114,7 +114,7 @@ const loggedInUser= await User.findById(user._id).select("-password -refreshToke
 const options={
     httpOnly:true,
     secure:false,
-    sameSite:"lax"
+    sameSite:"none"
 
 }
 return res.status(200).cookie("accessToken",accessToken,options).cookie("refreshToken",refreshToken,options).json(
@@ -136,7 +136,7 @@ new:true
 const options={
     httpOnly:true,
     secure:false,
-    sameSite:"lax"
+    sameSite:"none"
 }
 return res.status(200).clearCookie("accessToken",options).clearCookie("refreshToken",options)
 .json(new ApiResponse(200,{},"User logged Out"))
@@ -164,7 +164,7 @@ const refreshAccessToken=asyncHandler(async(req,res)=>{
      const options={
          httpOnly:true,
          secure:true,
-         sameSite:"lax"
+         sameSite:"none"
      }
     const {accessToken,refreshToken} = await generateAccessAndRefreshTokens(user._id)
      return res
