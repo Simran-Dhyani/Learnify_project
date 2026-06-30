@@ -1,6 +1,6 @@
 import React from "react";
 import {Login as LoginComponent} from "../components/index";
-import AnimatedBackground from "@/components/background/animatedBackground";
+import AnimatedBackground from "@/components/background/AnimatedBackground";
 function Login(){
     return(
      
