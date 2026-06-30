@@ -3,7 +3,7 @@ import TinyEditor from "../editor/TinyEditor";
 import { useState,useEffect } from "react";
 
 
-function NoteEditor({note,setNote,handleSave}){
+function NoteEditor({note,setNote,handleSave,editingId}){
 const [editor, setEditor] = useState(null);
 useEffect(() => {
 
@@ -109,7 +109,7 @@ items-center
     hover:shadow-none
     transition-all
     ">
-        Save Notes
+        {editingId ? "Update Note" : "Save Note"}
     </button>
 
     
