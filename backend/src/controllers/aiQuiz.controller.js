@@ -1,4 +1,4 @@
-import { generateQuizFromAI } from "../services/groq.service.js";
+﻿import { generateQuizFromAI } from "../services/groq.service.js";
 
 export const generateQuiz = async (req, res) => {
   try {

@@ -3,6 +3,7 @@ import cors from "cors"
 import cookieParser from "cookie-parser"
 
 
+
 const app=express()
 app.use(cors({
     origin :process.env.CORS_ORIGIN,
@@ -18,4 +19,6 @@ import noteRouter from "./routes/note.routers.js"
 app.use("/api/v1/notes",noteRouter)
 import aiQuizRouter from "./routes/aiQuiz.routers.js"
 app.use("/api/v1/ai",aiQuizRouter)
+import watchHistoryRouter from "./routes/watchHistory.routers.js"
+app.use("/api/v1/watch-history", watchHistoryRouter);
 export{app}

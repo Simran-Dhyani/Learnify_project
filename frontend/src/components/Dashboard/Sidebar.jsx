@@ -29,7 +29,7 @@ function Sidebar() {
   {
     title: "History",
     icon: History,
-    path: "/history",
+    path: "/watch-history",
   },
   {
     title: "Profile",

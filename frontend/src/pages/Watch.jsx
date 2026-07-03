@@ -13,10 +13,12 @@ import { Container } from "@/components";
 import NoteEditor from "@/components/watch/NoteEditor";
 import QuizPanel from "@/components/watch/QuizPanel";
 import { generateQuiz } from "@/services/aiQuizService";
+import authService from "@/services/authService";
 
 function Watch() {
   const { id } = useParams();
   const location = useLocation();
+  const thumbnail = location.state?.thumbnail;
   const [videoTitle, setVideoTitle] = useState(
     location.state?.videoTitle || "",
   );
@@ -25,6 +27,17 @@ function Watch() {
   const [quiz, setQuiz] = useState(null);
   const [loading, setLoading] = useState(false);
   const [editingId, setEditingId] = useState(null);
+
+  useEffect(() => {
+  if (!videoTitle || !thumbnail) return;
+
+  authService.addToWatchHistory({
+    videoId: id,
+    videoTitle,
+    thumbnail,
+  });
+}, [id, videoTitle, thumbnail]);
+ 
 
   useEffect(() => {
     if (location.state?.videoTitle) {

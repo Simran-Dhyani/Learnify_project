@@ -10,11 +10,14 @@ import Home from "./pages/Home";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
 import Watch from "./pages/Watch";
-
+import WatchHistory from "./pages/watchHistory";
 import Dashboard from "./pages/Dashboard";
 import MyNotes from "./pages/MyNotes";
-
+import Profile from "./pages/Profile";
+import { Toaster } from "react-hot-toast";
+<Toaster position="top-right" />
 const router = createBrowserRouter([
+   
   {
     path: "/",
     element:<App />,
@@ -43,16 +46,26 @@ const router = createBrowserRouter([
       {
       path:"/my-notes",
       element:<MyNotes/>
-      }
+      },
+      {
+      path:"/watch-history",
+      element:<WatchHistory/>
+      },
+      {
+     path:"/profile",
+     element:<Profile/>
+     }
 
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+ 
     <Provider store={store}>
+       <>
+      <Toaster position="top-center" />
       <RouterProvider router={router} />
+       </>
     </Provider>
-  </StrictMode>
-);
+)

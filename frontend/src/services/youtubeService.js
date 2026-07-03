@@ -20,6 +20,8 @@ export const fetchVideoTitle = async (videoId) => {
   const response = await fetch(
     `${BASE_URL}/videos?part=snippet&id=${encodeURIComponent(videoId)}&key=${API_KEY}`
   );
+  const d = await response.json();
+  console.log(d);
 
   if (!response.ok) {
     throw new Error("Failed to fetch video title");

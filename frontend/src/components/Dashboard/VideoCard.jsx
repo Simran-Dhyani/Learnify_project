@@ -8,6 +8,7 @@ function VideoCard({ video }) {
    to={`/watch/${video.id.videoId}`}
     state={{
     videoTitle: video.snippet.title,
+    thumbnail: video.snippet.thumbnails.high.url,
     }}
      >
 

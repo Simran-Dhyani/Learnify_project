@@ -16,10 +16,17 @@ function Dashboard() {
   setVideos(data)
   }
 
-  useEffect(()=>{
-    getVideos()
+  useEffect(() => {
+    const timer = setTimeout(() => {
+        if (searchQuery.trim() === "") {
+            getVideos(); // fetch default videos
+        } else {
+            getVideos();   // fetch searched videos
+        }
+    }, 500);
 
-  },[searchQuery])
+    return () => clearTimeout(timer);
+}, [searchQuery]);
 
   
 

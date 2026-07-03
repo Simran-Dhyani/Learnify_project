@@ -1,7 +1,9 @@
 import { Search, Bell } from "lucide-react";
+import { useSelector } from "react-redux";
+
 
 function Navbar({searchQuery,setSearchQuery}) {
-
+const user = useSelector((state) => state.auth.userData);
   return (
 
     <div className="flex items-center justify-between mb-10">
@@ -86,7 +88,7 @@ function Navbar({searchQuery,setSearchQuery}) {
         >
 
           <img
-            src="https://i.pravatar.cc/100"
+            src={user?.avatar||"https://i.pravatar.cc/100"}
             alt="profile"
             className="w-full h-full object-cover"
           />

@@ -47,7 +47,7 @@ function MyNotes() {
             {videos.map((video) => (
               <div
                 key={video._id}
-                className="group overflow-hidden rounded-3xl bg-white/70 backdrop-blur-xl shadow-lg hover:-translate-y-2 hover:shadow-purple-400/30 transition-all duration-500"
+                className="group overflow-hidden rounded-3xl bg-white/70 backdrop-blur-xl hover:shadow-lg hover:-translate-y-2 hover:shadow-cyan-400 transition-all duration-500"
               >
                 <div className="relative">
                   <img
